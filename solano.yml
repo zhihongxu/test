@@ -1,0 +1,45 @@
+# Solano CI Configuration
+#
+# See http://docs.solanolabs.com/ for more information.
+
+# Set global environment variables for all subcommands and tests
+#:environment:
+#  'PROJECT_ENV_VAR': 'project-specific-env-var-value'
+
+# Run build-wide and per-worker setup
+#:hooks:
+#  :pre_setup: './pre_setup.sh'
+#  :worker_setup: './worker_setup.sh'
+# Time out hooks if they (each) run for more than 20 minutes
+#:timeout_hook: 1200
+
+# Configure caching of project
+#:cache:
+#  :key_paths:
+#    - pre_setup.sh
+#  :save_paths:
+#    - HOME/project-path
+
+# Timeout a given test command after 30 minutes
+#:timeout: 1800
+
+# Each element in the tests list will be queued to run, and executed in parallel. Each element can be bash command line.
+:tests:
+  - ". project.sh && ./build.sh"
+
+
+  # To capture JUnit XML output from a command line, set its type to "junit"
+  # and indicate where Solano CI can find the XML files
+  #- type: junit
+  #  command: "test command"
+  #  output: exit-status
+  #  invocation: single
+  #  mode: basic
+  #  report_files:
+  #  - "**/junit-reports/**.xml"
+
+# Attach files relative to the repo to the build report
+#:collect:
+#  :repo:
+#    - relative/path/to/directory/to/save
+~                                         
